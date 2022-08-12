@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sort Without Articles</title>
+</head>
+<body>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #bands {
+      list-style: inside square;
+      font-size: 20px;
+      background: white;
+      width: 500px;
+      margin: auto;
+      padding: 0;
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    #bands li {
+      border-bottom: 1px solid #efefef;
+      padding: 20px;
+    }
+    
+    #bands li:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: #ffc600;
+      text-decoration: none;
+    }
+
+  </style>
+
+  <ul id="bands"></ul>
+
+<script>
+const bandDOM = document.querySelector('#bands');
+let bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+// Remove articles "the", "a", "an" and "Oh"
+bands = bands.map(band => {
+  band = band.split(' ');
+  let first = band[0].toLowerCase();
+  if (first == "the" || first == "a" || first == "an") band.shift();
+  return band.join(' ');
+});
+
+// Sort the array in alphabetical order
+bands.sort((a, b) => {
+  // When -1 is returned a is placed in front while 1 places a at the back
+  return a === b ? 0 : ((a < b) ? -1 : 1);
+});
+
+// display the band names as list item
+bands.forEach((band) => {
+  let li = document.createElement('li');
+  li.textContent = band;
+  bandDOM.appendChild(li);
+});
+
+</script>
+</body>
+</html>
